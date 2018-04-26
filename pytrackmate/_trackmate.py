@@ -80,9 +80,8 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
     if get_tracks:
         filtered_track_ids = [int(track.get('TRACK_ID')) for track in root.find('Model').find('FilteredTracks').findall('TrackID')]
 
-        new_trajs = pd.DataFrame()
         label_id = 0
-        trajs = trajs.set_index('spot_id')
+        trajs['label'] = np.nan
 
         tracks = root.find('Model').find('AllTracks')
         for track in tracks.findall('Track'):
@@ -91,48 +90,15 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
             if track_id in filtered_track_ids:
 
                 spot_ids = [(edge.get('SPOT_SOURCE_ID'), edge.get('SPOT_TARGET_ID'), edge.get('EDGE_TIME')) for edge in track.findall('Edge')]
-                spot_ids = np.array(spot_ids).astype('float')
-                spot_ids = pd.DataFrame(spot_ids, columns=['source', 'target', 'time'])
-                spot_ids = spot_ids.sort_values(by='time')
-                spot_ids = spot_ids.set_index('time')
+                spot_ids = np.array(spot_ids).astype('float')[:, :2]
+                spot_ids = set(spot_ids.flatten())
 
-                # Build graph
-                graph = nx.Graph()
-                for t, spot in spot_ids.iterrows():
-                    graph.add_edge(int(spot['source']), int(spot['target']), attr_dict=dict(t=t))
+                trajs.loc[trajs["spot_id"].isin(spot_ids), "label"] = label_id
+                label_id += 1
 
-                # Find graph extremities by checking if number of neighbors is equal to 1
-                tracks_extremities = [node for node in graph.nodes() if len(list(graph.neighbors(node))) == 1]
-
-                paths = []
-                # Find all possible paths between extremities
-                for source, target in itertools.combinations(tracks_extremities, 2):
-
-                    # Find all path between two nodes
-                    for path in nx.all_simple_paths(graph, source=source, target=target):
-
-                        # Now we need to check wether this path respect the time logic contraint
-                        # edges can only go in one direction of the time
-
-                        # Build times vector according to path
-                        t = []
-                        for i, node_srce in enumerate(path[:-1]):
-                            node_trgt = path[i + 1]
-                            t.append(graph.edges[(node_srce, node_trgt)]["attr_dict"]['t'])
-
-                        # Will be equal to 1 if going to one time direction
-                        if len(np.unique(np.sign(np.diff(t)))) == 1:
-                            paths.append(path)
-
-                # Add each individual trajectory to a new DataFrame called new_trajs
-                for path in paths:
-                    traj = trajs.loc[path].copy()
-                    traj['label'] = label_id
-                    label_id += 1
-
-                    new_trajs = new_trajs.append(traj)
-
-        trajs = new_trajs
+        # Label remaining columns
+        single_track = trajs.loc[trajs["label"].isnull()]
+        trajs.loc[trajs["label"].isnull(), "label"] = label_id + np.arange(0, len(single_track))
 
     return trajs
 

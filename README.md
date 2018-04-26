@@ -35,6 +35,6 @@ Under BSD license. See [LICENSE](LICENSE).
 
 - Clean dist: `rm -fr *.egg-info dist/ build/`
 - Run `python release.py`
-- Create and upload packages : `python setup.py sdist bdist_wheel && twine upload dist/*`
+- Create and upload packages : `twine upload dist/*`
 - Update `conda-forge` recipe.
 

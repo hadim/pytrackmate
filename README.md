@@ -6,16 +6,7 @@ Import [Trackmate](https://imagej.net/TrackMate) XML files in Python as Pandas d
 
 ## Usage
 
-```python
-from read_roi import read_roi_file
-from read_roi import read_roi_zip
-
-roi = read_roi_file(roi_file_path)
-
-# or
-
-rois = read_roi_zip(roi_zip_path)
-```
+Check the [notebook[(Notebooks/Trackmate.py).
 
 ## Requirements
 

@@ -1,11 +1,16 @@
 from setuptools import setup
 from setuptools import find_packages
 
+with open('README.md') as f:
+    long_description = f.read()
 
 setup(author='Hadrien Mary',
       author_email='hadrien.mary@gmail.com',
       url='https://github.com/hadim/pytrackmate/',
       description='Import Trackmate XML files in Python as Pandas dataframe.',
+
+      long_description=long_description,
+      long_description_content_type='text/markdown',
 
       packages=find_packages(),
 

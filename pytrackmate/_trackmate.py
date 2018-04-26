@@ -46,12 +46,11 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
     objects = []
     for frame in spots.findall('SpotsInFrame'):
         for spot in frame.findall('Spot'):
-
             single_object = []
             for label in features:
                 single_object.append(spot.get(label))
-
             objects.append(single_object)
+
     trajs = pd.DataFrame(objects, columns=features)
     trajs = trajs.astype(np.float)
 
@@ -103,7 +102,7 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
                     graph.add_edge(int(spot['source']), int(spot['target']), attr_dict=dict(t=t))
 
                 # Find graph extremities by checking if number of neighbors is equal to 1
-                tracks_extremities = [node for node in graph.nodes() if len(graph.neighbors(node)) == 1]
+                tracks_extremities = [node for node in graph.nodes() if len(list(graph.neighbors(node))) == 1]
 
                 paths = []
                 # Find all possible paths between extremities
@@ -119,7 +118,7 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
                         t = []
                         for i, node_srce in enumerate(path[:-1]):
                             node_trgt = path[i + 1]
-                            t.append(graph.edge[node_srce][node_trgt]['t'])
+                            t.append(graph.edges[(node_srce, node_trgt)]["attr_dict"]['t'])
 
                         # Will be equal to 1 if going to one time direction
                         if len(np.unique(np.sign(np.diff(t)))) == 1:

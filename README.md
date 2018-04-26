@@ -33,6 +33,7 @@ Under BSD license. See [LICENSE](LICENSE).
 
 ## How to release a new version
 
+- Clean dist: `rm -fr *.egg-info dist/ build/`
 - Run `python release.py`
 - Create and upload packages : `python setup.py sdist bdist_wheel && twine upload dist/*`
 - Update `conda-forge` recipe.

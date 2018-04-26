@@ -6,7 +6,7 @@ Import [Trackmate](https://imagej.net/TrackMate) XML files in Python as Pandas d
 
 ## Usage
 
-Check the [notebook[(Notebooks/Trackmate.py).
+Check the [notebook](Notebooks/Trackmate.py).
 
 ## Requirements
 

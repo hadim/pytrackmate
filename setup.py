@@ -12,6 +12,8 @@ setup(author='Hadrien Mary',
       long_description=long_description,
       long_description_content_type='text/markdown',
 
+      install_requires=["numpy", "pandas"],
+
       packages=find_packages(),
 
       classifiers=['Development Status :: 5 - Production/Stable',

@@ -1,9 +1,7 @@
-import itertools
 import xml.etree.cElementTree as et
 
 import numpy as np
 import pandas as pd
-import networkx as nx
 
 
 def trackmate_peak_import(trackmate_xml_path, get_tracks=False):

@@ -6,7 +6,7 @@ with open('README.md') as f:
 
 
 setup(name="pytrackmate",
-      version="1.1.1",
+      version='1.2.0',
       author='Hadrien Mary',
       author_email='hadrien.mary@gmail.com',
       url='https://github.com/hadim/pytrackmate/',

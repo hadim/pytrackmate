@@ -25,7 +25,7 @@ install:
   - conda info -a
   - conda create -n conda_env python=$PYTHON_VERSION
   - conda activate conda_env
-  - conda install numpy pandas
+  - conda install numpy pandas nose
 
 script:
   - conda activate conda_env

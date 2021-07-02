@@ -1,6 +1,6 @@
 $PROJECT = 'pytrackmate'
 
-$ACTIVITIES = ['version_bump', 'tag', 'push_tag', 'pypi', 'ghrelease']
+$ACTIVITIES = ['check', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease']
 
 $VERSION_BUMP_PATTERNS = [('pytrackmate/_version.py', '__version__\s*=.*', "__version__ = '$VERSION'"),
                           ('setup.py', 'version\s*=.*,', "version='$VERSION',")

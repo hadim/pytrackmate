@@ -37,7 +37,7 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
                      'SNR': 'snr'}
 
     features = root.find('Model').find('FeatureDeclarations').find('SpotFeatures')
-    features = [c.get('feature') for c in features.getchildren()] + ['ID']
+    features = [c.get('feature') for c in list(features)] + ['ID']
 
     spots = root.find('Model').find('AllSpots')
     trajs = pd.DataFrame([])

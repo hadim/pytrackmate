@@ -15,7 +15,10 @@ $CHANGELOG_FILENAME = 'CHANGELOG.rst'
 $CHANGELOG_TEMPLATE = 'TEMPLATE.rst'
 $CHANGELOG_NEWS = 'news'
 
-$ACTIVITIES = ['check', 'authors', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease']
+$PYPI_BUILD_COMMANDS = ['sdist', 'bdist']
+$PYPI_UPLOAD = True
+
+$ACTIVITIES = ['check', 'authors', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease', 'pypi']
 
 $VERSION_BUMP_PATTERNS = [('pytrackmate/_version.py', r'__version__\s*=.*', "__version__ = \"$VERSION\""),
                           ('setup.py', r'version\s*=.*,', "version=\"$VERSION\",")

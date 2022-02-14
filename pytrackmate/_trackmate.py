@@ -70,7 +70,7 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
                              value=float(spot_filter.get('value')),
                              isabove=True if spot_filter.get('isabove') == 'true' else False)
 
-    trajs = trajs.loc[:, object_labels.keys()]
+    trajs = trajs.reindex(columns = object_labels.keys())
     trajs.columns = [object_labels[k] for k in object_labels.keys()]
     trajs['label'] = np.arange(trajs.shape[0])
 

@@ -50,7 +50,7 @@ def trackmate_peak_import(trackmate_xml_path, get_tracks=False):
             objects.append(single_object)
 
     trajs = pd.DataFrame(objects, columns=features)
-    trajs = trajs.astype(np.float)
+    trajs = trajs.astype(float)
 
     # Apply initial filtering
     initial_filter = root.find("Settings").find("InitialSpotFilter")

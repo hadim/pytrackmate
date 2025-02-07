@@ -1,9 +1,11 @@
 # pytrackmate
 
+[pypi-badge]: https://img.shields.io/pypi/v/pytrackmate
 [release-badge]: https://img.shields.io/github/v/release/hadim/pytrackmate?logo=github
 [test-badge]: https://github.com/hadim/pytrackmate/actions/workflows/test.yaml/badge.svg?branch=main
 [lint-badge]: https://github.com/hadim/pytrackmate/actions/workflows/lint.yaml/badge.svg?branch=main
 
+[![PyPI - Version][pypi-badge]](https://pypi.org/project/pytrackmate/)
 [![GitHub Release][release-badge]](https://github.com/hadim/pytrackmate/releases)
 [![Test CI][test-badge]](https://github.com/hadim/pytrackmate/actions/workflows/test.yaml)
 [![Lint CI][lint-badge]](https://github.com/hadim/pytrackmate/actions/workflows/lint.yaml)

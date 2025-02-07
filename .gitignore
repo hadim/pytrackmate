@@ -180,3 +180,4 @@ output
 .vscode/
 
 .ruff_cache/
+.DS_Store

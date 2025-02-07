@@ -78,7 +78,7 @@ jobs:
       - name: Build the wheel and sdist
         env:
           SETUPTOOLS_SCM_PRETEND_VERSION: ${{ inputs.release-version }}
-        run: python -m build --no-isolation
+        run: python -m build --no-isolation --wheel --sdist
 
       # Release logic
 

@@ -120,3 +120,32 @@ jobs:
         with:
           tag_name: ${{ inputs.release-version }}
           body: ${{steps.github_release.outputs.changelog}}
+
+  upload-to-pypi:
+    name: upload-to-pypi
+    runs-on: ubuntu-latest
+    needs: release
+
+    env:
+      PIXI_ENV_NAME: dev
+
+    permissions:
+      # IMPORTANT: this permission is mandatory for Trusted Publishing
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: prefix-dev/setup-pixi@v0.8.1
+        with:
+          environments: ${{ env.PIXI_ENV_NAME }}
+          activate-environment: true
+
+      # Upload the package to PyPI
+      - name: Build the wheel and sdist
+        env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: ${{ inputs.release-version }}
+        run: python -m build --no-isolation --wheel --sdist
+
+      - name: Upload to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

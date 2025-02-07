@@ -10,6 +10,19 @@
 
 Import [Trackmate](https://imagej.net/TrackMate) XML files in Python as Pandas dataframe.
 
+## Installation 📦
+
+```bash
+# Pip
+pip install pytrackmate
+
+# Conda (mamba and micromamba)
+conda install -c conda-forge pytrackmate
+
+# Pixi
+pixi add pytrackmate
+```
+
 ## Usage 🚀
 
 Check the [notebook](notebooks/Trackmate.ipynb).
@@ -39,19 +52,6 @@ spots = trackmate_peak_import(fname)
 - `snr`
 - `label`
 
-## Installation 📦
-
-```bash
-# Pip
-pip install pytrackmate
-
-# Conda (mamba and micromamba)
-conda install -c conda-forge pytrackmate
-
-# Pixi
-pixi add pytrackmate
-```
-
 ## Development 🛠️
 
 You need to use [pixi](https://pixi.sh).
@@ -75,5 +75,6 @@ To cut a new release:
 
 - Trigger [the `release` workflow on the main branch](https://github.com/hadim/pytrackmate/actions/workflows/release.yaml).
 - A new GitHub Release will be created with the new version.
+- The new version will be uploaded on PyPi.
 - The conda-forge bot will create a PR to update the [feedstock](https://github.com/conda-forge/pytrackmate-feedstock).
 - Once the conda-forge PR merged, the new conda version will be available.

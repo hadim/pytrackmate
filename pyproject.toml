@@ -16,7 +16,8 @@ classifiers = [
 ]
 requires-python = ">=3.10"
 dependencies = ["numpy", "pandas"]
-dynamic = ["version", "readme"]
+dynamic = ["readme"] # ["version", "readme"]
+version = "0.1.0"
 
 [project.urls]
 homepage = "https://github.com/hadim/pytrackmate"
@@ -38,19 +39,20 @@ readme = { file = ["README.md"], content-type = "text/markdown" }
 
 # Pixi configuration
 
-[tool.pixi.project]
+[tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "osx-arm64", "win-64", "linux-aarch64"]
+preview = ["pixi-build"]
+
+[tool.pixi.package]
 
 # Pixi dependencies and features
 
 [tool.pixi.dependencies]
+pytrackmate = { path = "." }
 python = ">=3.10"
 numpy = "*"
 pandas = "*"
-
-[tool.pixi.pypi-dependencies]
-pytrackmate = { path = ".", editable = true }
 
 [tool.pixi.feature.dev.dependencies]
 pip = "*"
@@ -86,3 +88,17 @@ test-py310 = ["dev", "py310"]
 test-py311 = ["dev", "py311"]
 test-py312 = ["dev", "py312"]
 test-py313 = ["dev", "py313"]
+
+# Pixi build
+
+[tool.pixi.package.host-dependencies]
+pip = "*"
+setuptools = ">=75"
+setuptools-scm = ">=8"
+
+[tool.pixi.package.build]
+backend = { name = "pixi-build-python", version = "*" }
+channels = [
+    "https://repo.prefix.dev/pixi-build-backends",
+    "https://fast.prefix.dev/conda-forge",
+]
